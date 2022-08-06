@@ -1,4 +1,5 @@
 import {ERROR} from '../enum/error';
+import {Window} from '../interface/window';
 
 export class WindowsManagerError extends Error {
 	constructor(msg: string) {
