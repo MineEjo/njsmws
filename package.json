@@ -5,9 +5,8 @@
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"scripts": {
-		"test": "node dist/",
-		"start": "npm run build && npm run test",
-		"build": "tsc -b ."
+		"build:required": "tsc -b .",
+		"publish:npm": "npm run build:required && npm publish"
 	},
 	"repository": {
 		"type": "git",

@@ -74,3 +74,15 @@ wm.create(componentWindowId, Secondary, {
 	title: 'Window'
 });
 ```
+
+## For Developers
+
+- Before any commit, do the following steps.
+
+```bash
+$ npm run build:required
+# Or use the automatic version
+$ npm run publish:npm 
+```
+
+See the [package source](https://github.com/MineEjo/njsmws) for more details.
