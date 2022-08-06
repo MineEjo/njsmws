@@ -1,0 +1,25 @@
+# VisualStudioCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Source Code
+src/
+
+# Configs
+tsconfig.json
+
+# Local History for Visual Studio Code
+.history/
+
+# Webstorm
+.idea/
+
+# NodeJS
+node_modules/
+
+# Other
+.DS_Store

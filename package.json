@@ -1,0 +1,38 @@
+{
+	"name": "njsmws",
+	"version": "0.0.1",
+	"description": "Neutralino.js multi-window support for Svelte.",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"test": "node dist/",
+		"start": "npm run build && npm run test",
+		"build": "tsc -b ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/MineEjo/njsmws.git"
+	},
+	"keywords": [
+		"multi",
+		"window",
+		"svelte",
+		"typescript",
+		"ts",
+		"javascript",
+		"js",
+		"desktop",
+		"app",
+		"neutralinojs"
+	],
+	"author": "MineEjo",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/MineEjo/njsmws/issues"
+	},
+	"homepage": "https://github.com/MineEjo/njsmws#readme",
+	"devDependencies": {
+		"@types/node": "^18.6.4",
+		"typescript": "^4.7.4"
+	}
+}
