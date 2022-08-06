@@ -8,25 +8,14 @@ export class WindowsManagerError extends Error {
 }
 
 export class WindowsManager {
-	initialized: boolean = false;
-
 	/**
 	 * It creates a new instance of the component and renders it to the DOM.
 	 * @param {any} component - The component to be rendered.
 	 * @param {string} id - The id of the div element that will be used to render the component.
 	 */
 	constructor(public component: any, public id: string) {
-		Neutralino.app.getConfig().then((cfg) => {
-			if (cfg?.['tokenSecurity'] !== 'sessionStorage' && cfg?.['tokenSecurity'] !== 'none') {
-				console.error(new WindowsManagerError(ERROR.TOKEN.replace('${var}', cfg?.['tokenSecurity'])));
-				this.initialized = false;
-			} else {
-				this.component = new component({
-					target: document.getElementById(id)
-				});
-
-				this.initialized = true;
-			}
+		this.component = new component({
+			target: document.getElementById(id)
 		});
 	}
 
@@ -37,16 +26,20 @@ export class WindowsManager {
 	 * @param options - {}
 	 */
 	create(id: string, component: any, options: {}) {
-		if (!this.initialized) return;
-
-		Neutralino.storage.getData(id).then((content: string) => {
-			if (JSON.parse(content)?.['token'] === NL_TOKEN) {
-				this.recreate(id, component, options).catch((e) => console.error(e));
+		Neutralino.app.getConfig().then((cfg) => {
+			if (cfg?.['tokenSecurity'] !== 'sessionStorage' && cfg?.['tokenSecurity'] !== 'none') {
+				console.error(new WindowsManagerError(ERROR.TOKEN.replace('${var}', cfg?.['tokenSecurity'])));
 			} else {
-				this.reset(id).then(() => this.recreate(id, component, options));
+				Neutralino.storage.getData(id).then((content: string) => {
+					if (JSON.parse(content)?.['token'] === NL_TOKEN) {
+						this.recreate(id, component, options).catch((e) => console.error(e));
+					} else {
+						this.reset(id).then(() => this.recreate(id, component, options));
+					}
+				}).catch(() => {
+					this.reset(id).then(() => this.recreate(id, component, options));
+				});
 			}
-		}).catch(() => {
-			this.reset(id).then(() => this.recreate(id, component, options));
 		});
 	}
 
